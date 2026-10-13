@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>数学｜まとめノート</title>
+<meta name="description" content="世界を記述する言葉と、その言葉そのものの探究。数・形・変化・確からしさ・構造と論理・計算の地図と流れ、少ない要素から複雑が生まれる仕組みや期待値、対称性をめぐる自分の問い。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#f7f8f6;--surface:#fff;--ink:#20241f;--muted:#5f665d;--faint:#99a096;--line:#e0e4dd;--accent:#7a5aa8;--wash:#f0ebf7}
+  @media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121412;--surface:#1a1d1a;--ink:#e7ebe5;--muted:#a5aca2;--faint:#687065;--line:#2a2f29;--accent:#c2a8e8;--wash:#241d30}}
+  :root[data-theme="dark"]{--bg:#121412;--surface:#1a1d1a;--ink:#e7ebe5;--muted:#a5aca2;--faint:#687065;--line:#2a2f29;--accent:#c2a8e8;--wash:#241d30}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.95 "Noto Sans JP",sans-serif;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:46rem;margin:auto;padding:0 16px} @media(min-width:640px){.wrap{padding:0 24px}}
+  a{color:inherit}
+  .top{padding-top:24px}
+  .back{font-size:.75rem;color:var(--muted);text-decoration:none}.back:hover{color:var(--ink)}
+  header{padding:68px 0 44px;border-bottom:1px solid var(--line)}
+  .kicker{margin:0 0 16px;font-size:.7rem;letter-spacing:.24em;color:var(--accent);font-weight:700}
+  h1{font:600 clamp(2rem,5.6vw,3rem)/1.45 "Noto Serif JP",serif;margin:0 0 6px;letter-spacing:.04em}
+  .mn-tagline{font-family:"Noto Serif JP",serif;font-weight:500;font-size:clamp(1.05rem,2.6vw,1.4rem);line-height:1.75;margin:.1em 0 1.1em;opacity:.85}
+  .lead{margin:0;max-width:34em;color:var(--muted)}
+  .toc{display:flex;flex-wrap:wrap;gap:6px 16px;margin:24px 0 0;padding:0;list-style:none;font-size:.82rem}
+  .toc a{color:var(--accent);text-decoration:none}
+  section{padding:50px 0;border-bottom:1px solid var(--line)}
+  .sec-n{display:block;font-size:.7rem;letter-spacing:.2em;color:var(--accent);font-weight:700;margin-bottom:6px}
+  h2{font:600 1.5rem/1.5 "Noto Serif JP",serif;margin:0 0 14px;letter-spacing:.03em}
+  p{margin:0 0 16px}
+  .pull{margin:20px 0;padding:4px 0 4px 18px;border-left:2px solid var(--accent);font:500 1.1rem/1.8 "Noto Serif JP",serif}
+  .note-s{color:var(--faint);font-size:.84rem;margin:-6px 0 18px}
+  .map{display:grid;grid-template-columns:1fr;gap:12px;margin:18px 0 0}
+  @media(min-width:640px){.map{grid-template-columns:1fr 1fr}}
+  .map > div{padding:16px 18px;background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--accent);border-radius:4px}
+  .map small{display:block;font-size:.66rem;letter-spacing:.16em;color:var(--accent);font-weight:700;margin-bottom:2px}
+  .map b{display:block;font-family:"Noto Serif JP",serif;font-weight:600;font-size:1.05rem;margin-bottom:4px}
+  .map p{margin:0;font-size:.9rem;color:var(--muted)}
+  .map .q{display:block;margin-top:6px;font-size:.84rem;color:var(--ink)}
+  .map a.go{display:inline-block;margin-top:8px;font-size:.8rem;color:var(--accent);text-decoration:none}
+  .scale{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:14px 0 4px;font-size:.84rem}
+  .scale span{padding:6px 12px;background:var(--wash);border-radius:999px}
+  .scale i{font-style:normal;color:var(--faint)}
+  ol.flow{list-style:none;margin:16px 0 0;padding:0;border-left:2px solid var(--line)}
+  ol.flow li{position:relative;padding:4px 0 14px 20px;font-size:.94rem}
+  ol.flow li::before{content:"";position:absolute;left:-6px;top:12px;width:10px;height:10px;border-radius:50%;background:var(--accent)}
+  ol.flow b{font-family:"Noto Serif JP",serif;font-weight:600;margin-right:8px}
+  ol.flow small{color:var(--faint);margin-right:8px}
+  ol.flow span{color:var(--muted)}
+  .tl{margin-top:8px;font-size:.88rem}.tl a{color:var(--accent)}
+  .qs{display:grid;gap:12px;margin-top:16px}
+  .qs article{padding:18px 20px;background:var(--surface);border:1px solid var(--line);border-radius:4px}
+  .qs h3{font:600 1.06rem/1.6 "Noto Serif JP",serif;margin:0 0 6px}
+  .qs p{margin:0 0 8px;font-size:.93rem;color:var(--muted)}
+  .qs .src{font-size:.78rem;color:var(--faint)}
+  .qs .src a{color:var(--accent);text-decoration:none;margin-right:10px}
+  .notes{border-top:1px solid var(--line)}
+  .notes a{display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:baseline;padding:20px 4px;border-bottom:1px solid var(--line);text-decoration:none}
+  .notes a:hover .ttl{color:var(--accent)}
+  .notes .idx{font-family:"Noto Serif JP",serif;color:var(--faint);font-size:.9rem}
+  .notes .cat{display:block;font-size:.66rem;letter-spacing:.2em;color:var(--faint)}
+  .notes .ttl{display:block;font-family:"Noto Serif JP",serif;font-weight:600;font-size:1.12rem}
+  .notes .desc{display:block;font-size:.88rem;color:var(--muted);line-height:1.8;margin-top:4px}
+  .notes .arrow{color:var(--faint)}
+  .open{padding:24px;background:var(--wash);border-radius:4px}
+  .open h2{font-size:1.2rem}
+  .open ul{margin:10px 0 0;padding-left:1.2em}.open li{margin:0 0 8px}
+  footer{padding:34px 0 60px;color:var(--faint);font-size:.76rem}
+  footer .related{color:var(--muted);font-size:.86rem;margin-bottom:16px}
+  footer .related a{color:var(--accent)}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <div class="top"><a class="back" href="../">← m-note トップ</a></div>
+  <header>
+    <p class="kicker">MATHEMATICS</p>
+    <h1>数学</h1>
+    <p class="mn-tagline">世界を記述する言葉と、その言葉そのものの探究。</p>
+    <p class="lead">物理学は数学の言葉で書かれ、経済も、AIも、確率の言葉で動いている。数学は、数や形、変化や確からしさを扱いながら、それを確かめる「証明」という方法を持つ学問です。その地図を広げ、自分の問いと重ねます。</p>
+    <ul class="toc"><li><a href="#what">数学とは</a></li><li><a href="#map">分野の地図</a></li><li><a href="#flow">流れ</a></li><li><a href="#questions">自分の問い</a></li><li><a href="#open">まだ答えが出ていない</a></li></ul>
+  </header>
+
+  <section id="what">
+    <span class="sec-n">01</span>
+    <h2>数学とは</h2>
+    
+    
+    <p class="pull">一度証明されたことは、二度とくつがえらない。</p>
+    <p>数学は、いくつかの前提（公理）から出発し、論理だけで結論を積み上げる学問です。実験で確かめる自然科学と違い、正しさは証明によって決まる。だから二千年以上前の定理が、いまも同じように正しい。</p>
+    <p>その一方で、数学は世界を記述するための言葉でもあります。現実とまったく関係なく生まれた理論が、あとから物理や情報の世界でぴったり役に立つことが何度も起きてきました。</p>
+  </section>
+  <section id="map">
+    <span class="sec-n">02</span>
+    <h2>分野の地図</h2>
+    
+    <div class="map"><div><small>NUMBER & ALGEBRA</small><b>数と代数</b><p>数の性質（整数論）と、文字で一般化した計算（代数）。方程式を解くことから、構造そのものを調べることへ。</p><span class="q">問い：素数には、なぜ規則がありそうでないのか</span></div><div><small>GEOMETRY & TOPOLOGY</small><b>形 ― 幾何とトポロジー</b><p>図形と空間の性質。ユークリッドの幾何から、曲がった空間の幾何、伸び縮みしても変わらない性質（トポロジー）まで。</p><span class="q">問い：空間がまっすぐでないとしたら、何が変わるのか</span></div><div><small>ANALYSIS</small><b>変化 ― 解析</b><p>微分と積分で、変化と累積を扱う。運動、成長、波など、変わり続けるものを記述する言葉。</p><span class="q">問い：無限に小さく分けることは、なぜうまくいくのか</span></div><div><small>PROBABILITY & STATISTICS</small><b>確からしさ ― 確率と統計</b><p>偶然を数として扱い、限られたデータから全体を推し量る。期待値で選択肢を比べることもここに入る。</p><span class="q">問い：入れる確率の数字を、どうすれば確かにできるのか</span><a class="go" href="../thinking/#decide">考え方の「決める」へ →</a></div><div><small>LOGIC & STRUCTURE</small><b>構造と論理</b><p>集合、論理、証明そのもの。数学の土台を調べるうちに、「証明できない正しいこと」があることまで分かった。</p><span class="q">問い：数学は発見されるものか、発明されるものか</span></div><div><small>COMPUTATION</small><b>計算と情報</b><p>計算できるとは何か（チューリング）、情報をどう測るか（シャノン）。コンピュータとAIの理論的な土台。</p><span class="q">問い：計算で表せないものは、何なのか</span></div></div>
+  </section>
+  <section id="flow">
+    <span class="sec-n">03</span>
+    <h2>流れ</h2>
+    
+    <ol class="flow"><li><small>前1800頃</small><b>バビロニアの粘土板</b><span>直角三角形の辺の比が、すでに並んでいた。</span></li><li><small>前300頃</small><b>ユークリッド『原論』</b><span>公理から定理を導く、証明の型ができる。</span></li><li><small>628</small><b>ゼロの計算規則</b><span>インドで、ゼロが数として扱われる。</span></li><li><small>1684</small><b>微分積分学</b><span>変化を記述する言葉が生まれる。</span></li><li><small>1832</small><b>ガロア理論</b><span>方程式が解ける条件を、対称性の「群」で説明する。</span></li><li><small>1931</small><b>不完全性定理</b><span>正しいのに証明できない命題がある。</span></li><li><small>1936・1948</small><b>計算と情報の理論</b><span>コンピュータの理論的な原型と、情報の単位「ビット」。</span></li></ol><p class="tl"><a href="../history-timeline/#cat=math">数学の歴史を年表で見る →</a></p>
+  </section>
+  <section id="questions">
+    <span class="sec-n">04</span>
+    <h2>自分の問い</h2>
+    
+    <div class="qs"><article><h3>少ない要素から、複雑が生まれる</h3><p>DNAはたった4種類の塩基の組み合わせで生命を生み出し、会計は5つの要素で企業活動を捉える。シンプルな要素と規則が組み合わさって、複雑な世界ができているのではないか。数学は、その「少ない要素」を探す営みにも見える。</p><div class="src"><a href="../musings/posts/p068.html">少ない要素から、複雑が生まれる →</a><a href="../musings/posts/p124.html">答えではなく、問いを残す →</a></div></article><article><h3>計算より、入れる数字のほうが難しい</h3><p>期待値の計算は誰がやっても同じ答えになる。違いが出るのは、そこに入れる確率と結果のほう。数学は判断を自動化する道具ではなく、自分がどんな前提で世界を見ているかを外に出す道具だった。</p><div class="src"><a href="../musings/posts/p040.html">計算より、入れる数字のほうが難しい →</a></div></article><article><h3>対称性は、世界の性質か、見る側の性質か</h3><p>物理の問いとして置いている「なぜ対称性があるのか」は、数学では「群」として調べられてきた。対称性を数えることが、方程式が解けるかどうかまで決めていた。</p><div class="src"><a href="../musings/posts/p002.html">対称性は、なぜ存在するんだろう。 →</a></div></article></div>
+  </section>
+  <section id="open">
+    
+    
+    
+    <div class="open"><h2>まだ答えが出ていない</h2><ul><li>数学は人間が発明したものなのか、それとも世界にあらかじめあるものを発見しているのか</li><li>なぜ数学は、これほど自然の記述に役立つのか</li><li>「少ない要素から複雑が生まれる」という見方は、どこまで当てはまるのか</li><li>確率の見積もりの精度は、どうすれば上げられるのか</li></ul></div>
+  </section>
+  <footer>
+    <p class="related">あわせて読む：<a href="../physics/">物理学</a> ・ <a href="../thinking/">考え方</a> ・ <a href="../biology/">生物学</a> ・ <a href="../history-timeline/#cat=math">歴史（数学）</a></p>
+    <p>専門家ではない個人が、学びと問いを書きとめたノートです。内容の正確性を保証するものではありません。</p>
+    <p><a class="back" href="../">← m-note トップ</a></p>
+  </footer>
+</main>
+</body>
+</html>
