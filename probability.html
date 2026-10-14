@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>確からしさ ― 確率と統計｜数学</title>
+<meta name="description" content="偶然にも、法則がある。確率と大数の法則、期待値、正規分布、ベイズの考え方、相関と因果。降水確率や検査の陽性など身のまわりの確率と統計、期待値で決めることとのつながり。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#f7f8f6;--surface:#fff;--ink:#20241f;--muted:#5f665d;--faint:#99a096;--line:#e0e4dd;--accent:#7a5aa8;--wash:#f0ebf7}
+  @media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121412;--surface:#1a1d1a;--ink:#e7ebe5;--muted:#a5aca2;--faint:#687065;--line:#2a2f29;--accent:#c2a8e8;--wash:#241d30}}
+  :root[data-theme="dark"]{--bg:#121412;--surface:#1a1d1a;--ink:#e7ebe5;--muted:#a5aca2;--faint:#687065;--line:#2a2f29;--accent:#c2a8e8;--wash:#241d30}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.95 "Noto Sans JP",sans-serif;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:46rem;margin:auto;padding:0 16px} @media(min-width:640px){.wrap{padding:0 24px}}
+  a{color:inherit}
+  .top{padding-top:24px}
+  .back{font-size:.75rem;color:var(--muted);text-decoration:none}.back:hover{color:var(--ink)}
+  header{padding:68px 0 44px;border-bottom:1px solid var(--line)}
+  .kicker{margin:0 0 16px;font-size:.7rem;letter-spacing:.24em;color:var(--accent);font-weight:700}
+  h1{font:600 clamp(2rem,5.6vw,3rem)/1.45 "Noto Serif JP",serif;margin:0 0 6px;letter-spacing:.04em}
+  .mn-tagline{font-family:"Noto Serif JP",serif;font-weight:500;font-size:clamp(1.05rem,2.6vw,1.4rem);line-height:1.75;margin:.1em 0 1.1em;opacity:.85}
+  .lead{margin:0;max-width:34em;color:var(--muted)}
+  .toc{display:flex;flex-wrap:wrap;gap:6px 16px;margin:24px 0 0;padding:0;list-style:none;font-size:.82rem}
+  .toc a{color:var(--accent);text-decoration:none}
+  section{padding:50px 0;border-bottom:1px solid var(--line)}
+  .sec-n{display:block;font-size:.7rem;letter-spacing:.2em;color:var(--accent);font-weight:700;margin-bottom:6px}
+  h2{font:600 1.5rem/1.5 "Noto Serif JP",serif;margin:0 0 14px;letter-spacing:.03em}
+  p{margin:0 0 16px}
+  .pull{margin:20px 0;padding:4px 0 4px 18px;border-left:2px solid var(--accent);font:500 1.1rem/1.8 "Noto Serif JP",serif}
+  .note-s{color:var(--faint);font-size:.84rem;margin:-6px 0 18px}
+  .map{display:grid;grid-template-columns:1fr;gap:12px;margin:18px 0 0}
+  @media(min-width:640px){.map{grid-template-columns:1fr 1fr}}
+  .map > div{padding:16px 18px;background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--accent);border-radius:4px}
+  .map small{display:block;font-size:.66rem;letter-spacing:.16em;color:var(--accent);font-weight:700;margin-bottom:2px}
+  .map b{display:block;font-family:"Noto Serif JP",serif;font-weight:600;font-size:1.05rem;margin-bottom:4px}
+  .map p{margin:0;font-size:.9rem;color:var(--muted)}
+  .map .q{display:block;margin-top:6px;font-size:.84rem;color:var(--ink)}
+  .map a.go{display:inline-block;margin-top:8px;font-size:.8rem;color:var(--accent);text-decoration:none}
+  .scale{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:14px 0 4px;font-size:.84rem}
+  .scale span{padding:6px 12px;background:var(--wash);border-radius:999px}
+  .scale i{font-style:normal;color:var(--faint)}
+  ol.flow{list-style:none;margin:16px 0 0;padding:0;border-left:2px solid var(--line)}
+  ol.flow li{position:relative;padding:4px 0 14px 20px;font-size:.94rem}
+  ol.flow li::before{content:"";position:absolute;left:-6px;top:12px;width:10px;height:10px;border-radius:50%;background:var(--accent)}
+  ol.flow b{font-family:"Noto Serif JP",serif;font-weight:600;margin-right:8px}
+  ol.flow small{color:var(--faint);margin-right:8px}
+  ol.flow span{color:var(--muted)}
+  .tl{margin-top:8px;font-size:.88rem}.tl a{color:var(--accent)}
+  .qs{display:grid;gap:12px;margin-top:16px}
+  .qs article{padding:18px 20px;background:var(--surface);border:1px solid var(--line);border-radius:4px}
+  .qs h3{font:600 1.06rem/1.6 "Noto Serif JP",serif;margin:0 0 6px}
+  .qs p{margin:0 0 8px;font-size:.93rem;color:var(--muted)}
+  .qs .src{font-size:.78rem;color:var(--faint)}
+  .qs .src a{color:var(--accent);text-decoration:none;margin-right:10px}
+  .notes{border-top:1px solid var(--line)}
+  .notes a{display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:baseline;padding:20px 4px;border-bottom:1px solid var(--line);text-decoration:none}
+  .notes a:hover .ttl{color:var(--accent)}
+  .notes .idx{font-family:"Noto Serif JP",serif;color:var(--faint);font-size:.9rem}
+  .notes .cat{display:block;font-size:.66rem;letter-spacing:.2em;color:var(--faint)}
+  .notes .ttl{display:block;font-family:"Noto Serif JP",serif;font-weight:600;font-size:1.12rem}
+  .notes .desc{display:block;font-size:.88rem;color:var(--muted);line-height:1.8;margin-top:4px}
+  .notes .arrow{color:var(--faint)}
+  .open{padding:24px;background:var(--wash);border-radius:4px}
+  .open h2{font-size:1.2rem}
+  .open ul{margin:10px 0 0;padding-left:1.2em}.open li{margin:0 0 8px}
+  footer{padding:34px 0 60px;color:var(--faint);font-size:.76rem}
+  footer .related{color:var(--muted);font-size:.86rem;margin-bottom:16px}
+  footer .related a{color:var(--accent)}
+
+  .law{margin:14px 0 18px;padding:16px 20px;background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:4px}
+  .law b{display:block;font-family:"Noto Serif JP",serif;font-weight:600;margin-bottom:2px}
+  .law .f{display:inline-block;margin:6px 0 2px;padding:2px 10px;background:var(--wash);border-radius:3px;font-family:ui-monospace,Menlo,monospace;font-size:.92rem}
+  .law p{margin:4px 0 0;color:var(--muted);font-size:.92rem}
+  ul.li{margin:0;padding-left:1.2em;font-size:.95rem;color:var(--muted)}
+  ul.li li{margin-bottom:8px} ul.li b{color:var(--ink)} ul.li a{color:var(--accent)}
+  .pager{display:flex;justify-content:space-between;gap:12px;margin-top:40px;padding-top:20px;border-top:1px solid var(--line);font-size:.86rem}
+  .pager a{color:var(--muted);text-decoration:none}.pager a:hover{color:var(--ink)}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <div class="top"><a class="back" href="./">← 数学</a></div>
+  <header>
+    <p class="kicker">MATHEMATICS · PROBABILITY & STATISTICS</p>
+    <h1>確からしさ ― 確率と統計</h1>
+    <p class="mn-tagline">偶然にも、法則がある。</p>
+    <p class="lead">一枚の硬貨の表裏は予測できなくても、千回投げれば表はほぼ半分になる。確率は偶然を数として扱い、統計は限られたデータから全体を推し量る分野です。どちらも、不確かな世界で判断するための道具として、いまでは科学からAIまでを支えています。</p>
+    <ul class="toc"><li><a href="#what">確率と統計とは</a></li><li><a href="#core">基本の考え方</a></li><li><a href="#life">身のまわりの確率と統計</a></li><li><a href="#flow">流れ</a></li><li><a href="#link">ほかの分野とのつながり</a></li><li><a href="#mine">自分の問いとのつながり</a></li><li><a href="#open">まだ答えが出ていない</a></li></ul>
+  </header>
+
+  <section id="what">
+    <span class="sec-n">01</span>
+    <h2>確率と統計とは</h2>
+    <p class="pull">一回は読めなくても、たくさん集めると読める。</p><p>確率は、起こりやすさを0から1の数で表します。統計は、手元のデータから、まだ見ていない全体について推し量ります。</p><p>大切なのは、確率が「未来を言い当てる」道具ではなく、「分からなさを正直に扱う」道具だということです。</p>
+  </section>
+  <section id="core">
+    <span class="sec-n">02</span>
+    <h2>基本の考え方</h2>
+    <div class="law"><b>大数の法則</b><p>回数を増やすほど、結果の割合は本当の確率に近づいていく。保険やくじが成り立つ理由。</p></div><div class="law"><b>期待値</b><span class="f">E = Σ 確率 × 結果</span><p>同じ選択を何度も繰り返したときの、平均的な結果。</p></div><div class="law"><b>正規分布</b><p>身長や測定の誤差のように、たくさんの小さな偶然が重なると、釣り鐘の形に分布する。</p></div><div class="law"><b>ベイズの考え方</b><p>新しい証拠が来るたびに、仮説の確からしさを更新していく。</p></div><div class="law"><b>相関と因果は違う</b><p>二つが一緒に増えていても、一方がもう一方の原因とは限らない。</p></div>
+  </section>
+  <section id="life">
+    <span class="sec-n">03</span>
+    <h2>身のまわりの確率と統計</h2>
+    <ul class="li"><li><b>降水確率30%</b> ― 同じような条件の日が10回あれば、3回くらいは雨が降るという意味。</li><li><b>検査で陽性でも、病気とは限らない</b> ― もともと珍しい病気なら、陽性のうち本当に病気の人は思ったより少ない。ベイズの考え方で分かる。</li><li><b>宝くじ</b> ― 期待値は、払った金額より低い。それでも買うのは、夢を買っているから。</li><li><b>世論調査</b> ― 千人ほどに聞くだけで、全体の傾向をかなりの精度で推し量れる。</li></ul>
+  </section>
+  <section id="flow">
+    <span class="sec-n">04</span>
+    <h2>流れ</h2>
+    <ol class="flow"><li><small>1654</small><b>パスカルとフェルマー</b><span>賭けの分け前の問題から、確率論が始まる。</span></li><li><small>1713</small><b>ベルヌーイの大数の法則</b><span></span></li><li><small>1763</small><b>ベイズの定理</b><span>証拠から仮説を更新する考え方が発表される。</span></li><li><small>1809</small><b>ガウスの正規分布</b><span>観測の誤差を扱う。</span></li><li><small>1933</small><b>コルモゴロフの公理</b><span>確率論を数学として厳密にする。</span></li><li><small>現代</small><b>機械学習</b><span>データから確率的に学ぶAIへ。</span></li></ol><p class="tl"><a href="../history-timeline/#cat=math">歴史の年表で見る →</a></p>
+  </section>
+  <section id="link">
+    <span class="sec-n">05</span>
+    <h2>ほかの分野とのつながり</h2>
+    <ul class="li"><li><b>物理学</b> ― <a href="../physics/thermodynamics.html">熱力学</a>は粒子の集まりを確率で扱い、<a href="../quantum/">量子力学</a>は結果そのものが確率でしか決まらない。</li><li><b>考え方</b> ― <a href="../thinking/#decide">期待値で決める</a>ことは、確率の使い方そのもの。</li></ul>
+  </section>
+  <section id="mine">
+    <span class="sec-n">06</span>
+    <h2>自分の問いとのつながり</h2>
+    <p class="pull">計算より、入れる数字のほうが難しい。</p><p>期待値の計算は誰がやっても同じ答えになる。違いが出るのは、そこへ入れる確率のほう。数学は判断を自動化する道具ではなく、自分の前提を外に出す道具だった。<a href="../musings/posts/p040.html">計算より、入れる数字のほうが難しい →</a></p><p>ベイズの考え方は、「最適解は答えではなく、現時点の仮説」という自分の考え方とよく似ています。新しいことが分かったら、確からしさを更新すればいい。</p>
+  </section>
+  <section id="open">
+    
+    <h2>まだ答えが出ていない</h2>
+    <div class="open"><ul><li>確率は、世界そのものの性質なのか、それとも私たちの知識が足りないことの表れなのか</li><li>確率の見積もりの精度は、どうすれば上げられるのか</li></ul></div>
+  </section>
+  <nav class="pager"><a href="analysis.html">← 変化 ― 解析</a><a href="logic.html">構造と論理 →</a></nav>
+  <footer>
+    <p class="related">あわせて読む：<a href="./">数学</a> ・ <a href="../thinking/">考え方</a> ・ <a href="analysis.html">変化</a></p>
+    <p>専門家ではない個人が、学びと問いを書きとめたノートです。内容の正確性を保証するものではありません。</p>
+    <p><a class="back" href="./">← 数学</a></p>
+  </footer>
+</main>
+</body>
+</html>

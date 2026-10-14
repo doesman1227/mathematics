@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>計算と情報｜数学</title>
+<meta name="description" content="計算できるとは、どういうことか。アルゴリズム、チューリングマシン、計算できない問題、計算の速さ、情報とビット、圧縮と誤り訂正。写真の圧縮やQRコード、AIなど身のまわりの計算と情報、脳とのつながり。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#f7f8f6;--surface:#fff;--ink:#20241f;--muted:#5f665d;--faint:#99a096;--line:#e0e4dd;--accent:#7a5aa8;--wash:#f0ebf7}
+  @media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121412;--surface:#1a1d1a;--ink:#e7ebe5;--muted:#a5aca2;--faint:#687065;--line:#2a2f29;--accent:#c2a8e8;--wash:#241d30}}
+  :root[data-theme="dark"]{--bg:#121412;--surface:#1a1d1a;--ink:#e7ebe5;--muted:#a5aca2;--faint:#687065;--line:#2a2f29;--accent:#c2a8e8;--wash:#241d30}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.95 "Noto Sans JP",sans-serif;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:46rem;margin:auto;padding:0 16px} @media(min-width:640px){.wrap{padding:0 24px}}
+  a{color:inherit}
+  .top{padding-top:24px}
+  .back{font-size:.75rem;color:var(--muted);text-decoration:none}.back:hover{color:var(--ink)}
+  header{padding:68px 0 44px;border-bottom:1px solid var(--line)}
+  .kicker{margin:0 0 16px;font-size:.7rem;letter-spacing:.24em;color:var(--accent);font-weight:700}
+  h1{font:600 clamp(2rem,5.6vw,3rem)/1.45 "Noto Serif JP",serif;margin:0 0 6px;letter-spacing:.04em}
+  .mn-tagline{font-family:"Noto Serif JP",serif;font-weight:500;font-size:clamp(1.05rem,2.6vw,1.4rem);line-height:1.75;margin:.1em 0 1.1em;opacity:.85}
+  .lead{margin:0;max-width:34em;color:var(--muted)}
+  .toc{display:flex;flex-wrap:wrap;gap:6px 16px;margin:24px 0 0;padding:0;list-style:none;font-size:.82rem}
+  .toc a{color:var(--accent);text-decoration:none}
+  section{padding:50px 0;border-bottom:1px solid var(--line)}
+  .sec-n{display:block;font-size:.7rem;letter-spacing:.2em;color:var(--accent);font-weight:700;margin-bottom:6px}
+  h2{font:600 1.5rem/1.5 "Noto Serif JP",serif;margin:0 0 14px;letter-spacing:.03em}
+  p{margin:0 0 16px}
+  .pull{margin:20px 0;padding:4px 0 4px 18px;border-left:2px solid var(--accent);font:500 1.1rem/1.8 "Noto Serif JP",serif}
+  .note-s{color:var(--faint);font-size:.84rem;margin:-6px 0 18px}
+  .map{display:grid;grid-template-columns:1fr;gap:12px;margin:18px 0 0}
+  @media(min-width:640px){.map{grid-template-columns:1fr 1fr}}
+  .map > div{padding:16px 18px;background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--accent);border-radius:4px}
+  .map small{display:block;font-size:.66rem;letter-spacing:.16em;color:var(--accent);font-weight:700;margin-bottom:2px}
+  .map b{display:block;font-family:"Noto Serif JP",serif;font-weight:600;font-size:1.05rem;margin-bottom:4px}
+  .map p{margin:0;font-size:.9rem;color:var(--muted)}
+  .map .q{display:block;margin-top:6px;font-size:.84rem;color:var(--ink)}
+  .map a.go{display:inline-block;margin-top:8px;font-size:.8rem;color:var(--accent);text-decoration:none}
+  .scale{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:14px 0 4px;font-size:.84rem}
+  .scale span{padding:6px 12px;background:var(--wash);border-radius:999px}
+  .scale i{font-style:normal;color:var(--faint)}
+  ol.flow{list-style:none;margin:16px 0 0;padding:0;border-left:2px solid var(--line)}
+  ol.flow li{position:relative;padding:4px 0 14px 20px;font-size:.94rem}
+  ol.flow li::before{content:"";position:absolute;left:-6px;top:12px;width:10px;height:10px;border-radius:50%;background:var(--accent)}
+  ol.flow b{font-family:"Noto Serif JP",serif;font-weight:600;margin-right:8px}
+  ol.flow small{color:var(--faint);margin-right:8px}
+  ol.flow span{color:var(--muted)}
+  .tl{margin-top:8px;font-size:.88rem}.tl a{color:var(--accent)}
+  .qs{display:grid;gap:12px;margin-top:16px}
+  .qs article{padding:18px 20px;background:var(--surface);border:1px solid var(--line);border-radius:4px}
+  .qs h3{font:600 1.06rem/1.6 "Noto Serif JP",serif;margin:0 0 6px}
+  .qs p{margin:0 0 8px;font-size:.93rem;color:var(--muted)}
+  .qs .src{font-size:.78rem;color:var(--faint)}
+  .qs .src a{color:var(--accent);text-decoration:none;margin-right:10px}
+  .notes{border-top:1px solid var(--line)}
+  .notes a{display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:baseline;padding:20px 4px;border-bottom:1px solid var(--line);text-decoration:none}
+  .notes a:hover .ttl{color:var(--accent)}
+  .notes .idx{font-family:"Noto Serif JP",serif;color:var(--faint);font-size:.9rem}
+  .notes .cat{display:block;font-size:.66rem;letter-spacing:.2em;color:var(--faint)}
+  .notes .ttl{display:block;font-family:"Noto Serif JP",serif;font-weight:600;font-size:1.12rem}
+  .notes .desc{display:block;font-size:.88rem;color:var(--muted);line-height:1.8;margin-top:4px}
+  .notes .arrow{color:var(--faint)}
+  .open{padding:24px;background:var(--wash);border-radius:4px}
+  .open h2{font-size:1.2rem}
+  .open ul{margin:10px 0 0;padding-left:1.2em}.open li{margin:0 0 8px}
+  footer{padding:34px 0 60px;color:var(--faint);font-size:.76rem}
+  footer .related{color:var(--muted);font-size:.86rem;margin-bottom:16px}
+  footer .related a{color:var(--accent)}
+
+  .law{margin:14px 0 18px;padding:16px 20px;background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:4px}
+  .law b{display:block;font-family:"Noto Serif JP",serif;font-weight:600;margin-bottom:2px}
+  .law .f{display:inline-block;margin:6px 0 2px;padding:2px 10px;background:var(--wash);border-radius:3px;font-family:ui-monospace,Menlo,monospace;font-size:.92rem}
+  .law p{margin:4px 0 0;color:var(--muted);font-size:.92rem}
+  ul.li{margin:0;padding-left:1.2em;font-size:.95rem;color:var(--muted)}
+  ul.li li{margin-bottom:8px} ul.li b{color:var(--ink)} ul.li a{color:var(--accent)}
+  .pager{display:flex;justify-content:space-between;gap:12px;margin-top:40px;padding-top:20px;border-top:1px solid var(--line);font-size:.86rem}
+  .pager a{color:var(--muted);text-decoration:none}.pager a:hover{color:var(--ink)}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <div class="top"><a class="back" href="./">← 数学</a></div>
+  <header>
+    <p class="kicker">MATHEMATICS · COMPUTATION & INFORMATION</p>
+    <h1>計算と情報</h1>
+    <p class="mn-tagline">計算できるとは、どういうことか。</p>
+    <p class="lead">コンピュータが生まれる前に、「計算できるとは何か」は数学の問題として定義されていました。そして、どんなに速いコンピュータでも解けない問題があることも、その時点で分かっていた。情報もまた「ビット」という単位で測れるものになり、私たちのデジタルな暮らしの土台になりました。</p>
+    <ul class="toc"><li><a href="#what">計算と情報とは</a></li><li><a href="#core">基本の考え方</a></li><li><a href="#life">身のまわりの計算と情報</a></li><li><a href="#flow">流れ</a></li><li><a href="#link">ほかの分野とのつながり</a></li><li><a href="#mine">自分の問いとのつながり</a></li><li><a href="#open">まだ答えが出ていない</a></li></ul>
+  </header>
+
+  <section id="what">
+    <span class="sec-n">01</span>
+    <h2>計算と情報とは</h2>
+    <p class="pull">計算できないことが、計算より先に分かっていた。</p><p>計算の理論は、どんな問題が手順（アルゴリズム）で解けるか、解けるならどれだけ速く解けるかを調べます。</p><p>情報理論は、情報の量を測り、それをどこまで小さく圧縮でき、どうすれば誤りなく伝えられるかを調べます。</p>
+  </section>
+  <section id="core">
+    <span class="sec-n">02</span>
+    <h2>基本の考え方</h2>
+    <div class="law"><b>アルゴリズム</b><p>問題を解くための、はっきりした手順。語源は9世紀の数学者フワーリズミー。</p></div><div class="law"><b>チューリングマシン</b><p>テープを読み書きするだけの単純な機械で、あらゆる計算を表せる。コンピュータの理論的な原型。</p></div><div class="law"><b>計算できない問題がある</b><p>どんなプログラムが止まるかを、すべて判定するプログラムはつくれない（停止問題）。</p></div><div class="law"><b>計算の速さ ― P と NP</b><p>答えを確かめるのは簡単でも、見つけるのが難しい問題がある。両者が本当に違うかは未解決。</p></div><div class="law"><b>情報とビット</b><p>情報の量は、はい・いいえの答えがいくつ分か（ビット）で測れる。圧縮や誤り訂正の限界も、そこから決まる。</p></div>
+  </section>
+  <section id="life">
+    <span class="sec-n">03</span>
+    <h2>身のまわりの計算と情報</h2>
+    <ul class="li"><li><b>スマホの写真が小さいのに綺麗</b> ― 人の目に分かりにくい情報を捨てて圧縮している。</li><li><b>汚れたQRコードが読める</b> ― 誤り訂正の符号で、一部が欠けても元の情報を復元している。</li><li><b>地図アプリの最短経路</b> ― グラフの上で最短の道を探すアルゴリズム。</li><li><b>対話するAI</b> ― 膨大な計算で、言葉の続きの確率を学んでいる。</li></ul>
+  </section>
+  <section id="flow">
+    <span class="sec-n">04</span>
+    <h2>流れ</h2>
+    <ol class="flow"><li><small>9世紀</small><b>フワーリズミー</b><span>アルゴリズムの語源。</span></li><li><small>1843</small><b>エイダ・ラブレス</b><span>機械が数以外も扱える可能性を書く。</span></li><li><small>1936</small><b>チューリングマシン</b><span>計算できるとは何かを定義する。</span></li><li><small>1948</small><b>シャノンの情報理論</b><span>情報をビットで測る。</span></li><li><small>1971</small><b>P対NP問題</b><span>計算の難しさをめぐる最大の未解決問題。</span></li><li><small>現代</small><b>AIと大規模計算</b><span>学習する計算の時代へ。</span></li></ol><p class="tl"><a href="../history-timeline/#cat=math,media">歴史の年表で見る →</a></p>
+  </section>
+  <section id="link">
+    <span class="sec-n">05</span>
+    <h2>ほかの分野とのつながり</h2>
+    <ul class="li"><li><b>物理学</b> ― 情報を消すと熱が出る。<a href="../physics/thermodynamics.html">熱力学</a>のエントロピーと情報のエントロピーは、同じ形の式で書かれる。</li><li><b>脳</b> ― <a href="../brain/">脳</a>も、予測と誤差を処理する一種の計算として捉えられる。</li></ul>
+  </section>
+  <section id="mine">
+    <span class="sec-n">06</span>
+    <h2>自分の問いとのつながり</h2>
+    <p class="pull">情報を処理することと、何かを経験することは、同じなのだろうか。</p><p>カメラも赤を検出する。でもカメラは「赤い」と感じているのだろうか。検知、情報処理、認知、主観的な経験は、分けて考える必要がある。<a href="../musings/posts/p107.html">物理だから単純、ではない →</a></p><p>自分の考えも、イメージから言葉へ、一瞬の「あ、こういうことだ」へと進む。それは計算なのか、それとも計算では表せない何かなのか。<a href="../musings/posts/p084.html">頭の中が一瞬、真っ白になる →</a></p>
+  </section>
+  <section id="open">
+    
+    <h2>まだ答えが出ていない</h2>
+    <div class="open"><ul><li>P と NP は本当に違うのか</li><li>意識や経験は、計算として表せるのか</li><li>AIの内部処理と、人間の主観的な体験は同じものなのか</li></ul></div>
+  </section>
+  <nav class="pager"><a href="logic.html">← 構造と論理</a><a href="./">数学 →</a></nav>
+  <footer>
+    <p class="related">あわせて読む：<a href="./">数学</a> ・ <a href="logic.html">構造と論理</a> ・ <a href="../thinking/">考え方</a></p>
+    <p>専門家ではない個人が、学びと問いを書きとめたノートです。内容の正確性を保証するものではありません。</p>
+    <p><a class="back" href="./">← 数学</a></p>
+  </footer>
+</main>
+</body>
+</html>
